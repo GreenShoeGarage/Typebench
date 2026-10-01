@@ -1,0 +1,17 @@
+{
+  "date": "2026-10-01",
+  "version": "1.0.0",
+  "command": "npm audit --omit=dev --json",
+  "exitCode": 0,
+  "auditReportVersion": 2,
+  "vulnerabilities": {},
+  "counts": {
+    "info": 0,
+    "low": 0,
+    "moderate": 0,
+    "high": 0,
+    "critical": 0,
+    "total": 0
+  },
+  "note": "Registry advisory snapshot, not a guarantee that the software has no vulnerabilities."
+}

@@ -1,0 +1,17 @@
+{
+  "date": "2026-10-01T20:36:14.455Z",
+  "version": "1.0.0",
+  "checks": [
+    "GFM preview, both sketch fences, scripts/HTML escaped and no silent resource requests",
+    "Image requests require explicit per-image permission and can be blocked again",
+    "Styled HTML export is safe and original Markdown download is exact",
+    "Heading navigation, keyboard divider, view and settings restoration",
+    "Formatting is grouped and preserves mixed line endings",
+    "Clean Markdown print layout and PDF output",
+    "Preview worker, syntax assets and HTML export work offline under a subdirectory",
+    "Phone source and preview controls remain reachable without overflow"
+  ],
+  "errors": [],
+  "browser": "153.0.8010.0",
+  "success": true
+}

@@ -1,0 +1,13 @@
+import assert from 'node:assert/strict';
+import AxeBuilder from '@axe-core/playwright';
+import {harness,waitSaved,command} from './harness.mjs';
+const {p,url,report,check,finish}=await harness('accessibility');report.violations=[];
+async function audit(name){const result=await new AxeBuilder({page:p}).withTags(['wcag2a','wcag2aa','wcag21aa']).analyze();const violations=result.violations.map(v=>({id:v.id,impact:v.impact,help:v.help,nodes:v.nodes.map(n=>({target:n.target,summary:n.failureSummary}))}));report.violations.push({name,violations});if(violations.length)console.log(JSON.stringify({name,violations},null,2));assert.equal(violations.length,0,name);check(name);}
+try{
+ await p.goto(url);await waitSaved(p);await audit('Empty workspace accessibility');await command(p,'Open an example');await p.locator('[data-example=markdown]').click();await p.waitForFunction(()=>document.getElementById('previewStatus').textContent==='Preview ready');
+ for(const theme of ['dark','light','contrast']){await p.locator('#settingsOpen').click();await p.locator('#theme').selectOption(theme);await audit(theme+' settings dialog');await p.locator('#settingsDialog [data-close]').click();await audit(theme+' editor and Markdown preview');await p.screenshot({path:`docs/screenshots/release-${theme}.png`});}
+ await p.locator('#actionsOpen').click();await audit('Searchable command menu accessibility');await p.keyboard.press('Escape');await p.locator('#viewpreview').click();await p.locator('#findOpen').click();assert.equal(await p.locator('#editorArea').getAttribute('data-view'),'split');await audit('Find and replace accessibility');await p.locator('#findClose').click();
+ await p.emulateMedia({reducedMotion:'reduce'});await p.setViewportSize({width:320,height:740});if(await p.locator('#sidebarToggle').getAttribute('aria-expanded')==='true')await p.locator('#sidebarToggle').click();await p.locator('#viewpreview').click();await audit('320 px mobile with reduced motion');assert(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));await p.screenshot({path:'docs/screenshots/release-mobile-320.png'});
+ await p.setViewportSize({width:720,height:480});await p.locator('#viewsource').click();assert(await p.locator('.cm-content').isVisible());assert(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));check('720 px viewport equivalent to a 1440 px display at 200% layout scale');
+ assert.deepEqual(report.errors,[]);report.success=true;
+}catch(e){report.success=false;report.failure=e.stack;console.error(e);await p.screenshot({path:'docs/screenshots/accessibility-failure.png'});process.exitCode=1;}finally{await finish();}

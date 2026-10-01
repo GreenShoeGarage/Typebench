@@ -1,0 +1,20 @@
+{
+  "date": "2026-10-01T20:35:38.703Z",
+  "version": "1.0.0",
+  "checks": [
+    "Failed storage write can export, retry, and recover after refresh",
+    "Internal heading links work; go-to-line reveals source from preview",
+    "Keyboard tab switching/deletion and recovery survive refresh",
+    "Workspace round trip keeps manual language; automatic detection can be restored",
+    "ZIP worker works after offline reload and preserves UTF-16BE BOM bytes",
+    "Ambiguous ZIP paths fail with actionable feedback and leave documents intact",
+    "5 MiB document edit, exact download, and undo"
+  ],
+  "errors": [],
+  "browser": "153.0.8010.0",
+  "largeEdit": {
+    "bytes": 5242886,
+    "editDownloadUndoMs": 1198
+  },
+  "success": true
+}

@@ -1,0 +1,26 @@
+{
+  "date": "2026-10-01",
+  "checks": [
+    "Find highlights, case, whole word, and wrapping navigation",
+    "Replace All is one undo/redo operation with mixed endings intact",
+    "Replace acts on the next match with one click",
+    "Advanced regex capture replacement",
+    "Invalid regex feedback and zero-width replacement",
+    "Searchable keyboard command menu and validated go-to-line",
+    "Indent and comment shortcuts preserve source and undo cleanly",
+    "Move and duplicate line shortcuts with mixed EOL",
+    "Tab insertion, whitespace display, and keyboard escape",
+    "New settings survive reload",
+    "Pathological regex times out without blocking editor or download",
+    "Search can be cancelled",
+    "Switching documents invalidates stale replacement results",
+    "Search worker and replacement work after offline reload",
+    "Search and commands visual review across themes and mobile",
+    "No uncaught editing workflow errors"
+  ],
+  "performance": [],
+  "errors": [],
+  "browser": "153.0.8010.0",
+  "success": true,
+  "version": "1.0.0"
+}

@@ -1,0 +1,54 @@
+{
+  "date": "2026-10-01",
+  "checks": [
+    "Cold start is empty, with New and Open actions",
+    "New, edit, Unicode, native download",
+    "Rename relative path and duplicate without overwriting",
+    "Independent undo/redo across tab switches",
+    "Close and reopen preserves in-session history",
+    "Mixed LF/CRLF/CR and UTF-8 BOM byte-for-byte round trip",
+    "UTF-16LE/BE BOM byte-for-byte round trips",
+    "Arduino base highlighting and language switch preserves bytes",
+    "Processing base highlighting with realistic sketch",
+    "Refresh restores text, active tab, language and settings",
+    "Dark, light, high-contrast rendering",
+    "Workspace export/import round trip",
+    "Two-window conflict prevents silent overwrite and exports losing copy",
+    "Imported HTML remains source text",
+    "Drag/drop file import",
+    "Offline reload, editing and export under subdirectory",
+    "390 px mobile layout and basic editing",
+    "Keyboard escape from editor focus",
+    "Quota failure retains text and provides recovery export",
+    "100 KiB / 1 MiB / 5 MiB / 10 MiB round trips and 1 MiB single line",
+    "Mac Command+S mapping (platform simulated)",
+    "Fresh Start persists an empty workspace",
+    "No uncaught browser errors"
+  ],
+  "performance": [
+    {
+      "bytes": 102400,
+      "openMs": 130,
+      "roundTripMs": 186
+    },
+    {
+      "bytes": 1048576,
+      "openMs": 236,
+      "roundTripMs": 292
+    },
+    {
+      "bytes": 5242880,
+      "openMs": 882,
+      "roundTripMs": 1001
+    },
+    {
+      "bytes": 10485760,
+      "openMs": 1579,
+      "roundTripMs": 1714
+    }
+  ],
+  "errors": [],
+  "browser": "153.0.8010.0",
+  "success": true,
+  "version": "1.0.0"
+}

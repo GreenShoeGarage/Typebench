@@ -1,0 +1,17 @@
+{
+  "version": "1.0.0",
+  "date": "2026-10-01",
+  "success": true,
+  "commands": {
+    "npm test": {
+      "passed": 18
+    },
+    "npm run test:editing": {
+      "passed": 15
+    },
+    "npm run test:languages": {
+      "passed": 24
+    }
+  },
+  "notes": "Counts are named checks, often containing multiple assertions."
+}

@@ -1,0 +1,19 @@
+{
+  "date": "2026-10-01T20:42:57.063Z",
+  "version": "1.0.0",
+  "checks": [
+    "Extracted ZIP starts under a subdirectory, has Mac shortcut labels, previews Arduino, reloads offline and exports without external requests"
+  ],
+  "errors": [],
+  "browser": "153.0.8010.0",
+  "runtimeSHA256": {
+    "index.html": "0b1d306e73059e7f08ca8c8d662fa9bd1c40b36294ee6539d2cae4bab3fb7768",
+    "assets/app.js": "0b0cbb86a243e49d5f0ff517d5b7a1e0a92620cb6ab0b6b227b16458599e8639",
+    "assets/app.css": "e866c167e98effc5c7c12ebe00a2fbafb0fb6fd21314c9fbb396c87a9f6c1474",
+    "assets/search-worker.js": "7a54d64ee350e0ac5912eb2a7076cc325bbfdbdb1786c0578f3dad0a3784263e",
+    "assets/markdown-worker.js": "4ae7042c6719f27b89b1dd0fcde538ee933bba112c52945ea937205d2e316345",
+    "assets/zip-worker.js": "09424185c7437305db38435a6371e20ef9f0f0d1c1c5ba0104ad86e28dc2e801",
+    "sw.js": "78ef52773e7b7408c22b9e5e0e98caac4ee3543ccf1bfb838dae376d0a809368"
+  },
+  "success": true
+}

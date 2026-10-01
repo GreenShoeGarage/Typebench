@@ -1,0 +1,62 @@
+{
+  "date": "2026-10-01T20:32:49.648Z",
+  "version": "1.0.0",
+  "checks": [
+    "Empty workspace accessibility",
+    "dark settings dialog",
+    "dark editor and Markdown preview",
+    "light settings dialog",
+    "light editor and Markdown preview",
+    "contrast settings dialog",
+    "contrast editor and Markdown preview",
+    "Searchable command menu accessibility",
+    "Find and replace accessibility",
+    "320 px mobile with reduced motion",
+    "720 px viewport equivalent to a 1440 px display at 200% layout scale"
+  ],
+  "errors": [],
+  "browser": "153.0.8010.0",
+  "violations": [
+    {
+      "name": "Empty workspace accessibility",
+      "violations": []
+    },
+    {
+      "name": "dark settings dialog",
+      "violations": []
+    },
+    {
+      "name": "dark editor and Markdown preview",
+      "violations": []
+    },
+    {
+      "name": "light settings dialog",
+      "violations": []
+    },
+    {
+      "name": "light editor and Markdown preview",
+      "violations": []
+    },
+    {
+      "name": "contrast settings dialog",
+      "violations": []
+    },
+    {
+      "name": "contrast editor and Markdown preview",
+      "violations": []
+    },
+    {
+      "name": "Searchable command menu accessibility",
+      "violations": []
+    },
+    {
+      "name": "Find and replace accessibility",
+      "violations": []
+    },
+    {
+      "name": "320 px mobile with reduced motion",
+      "violations": []
+    }
+  ],
+  "success": true
+}

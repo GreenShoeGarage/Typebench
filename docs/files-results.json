@@ -1,0 +1,19 @@
+{
+  "date": "2026-10-01T20:42:04.436Z",
+  "version": "1.0.0",
+  "checks": [
+    "Permission-based open and direct write with real browser file handles",
+    "External disk edits require explicit overwrite approval",
+    "Renaming during an in-flight write leaves the next Save asking for a destination",
+    "Permission failure preserves working text and download fallback",
+    "Save falls back to download on unsupported browsers",
+    "Workspace ZIP preserves relative paths, Unicode and mixed endings",
+    "Closed documents recover intact after file export",
+    "Easy/Advanced exposes deeper controls and persists without changing documents",
+    "Optional Processing example is explicitly loaded and editable",
+    "Fresh Start removes examples and restores an empty workspace"
+  ],
+  "errors": [],
+  "browser": "153.0.8010.0",
+  "success": true
+}
