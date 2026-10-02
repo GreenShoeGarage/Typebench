@@ -1,6 +1,6 @@
 {
-  "date": "2026-10-01T20:35:38.703Z",
-  "version": "1.0.0",
+  "date": "2026-10-01T21:18:42.243Z",
+  "version": "1.1.0",
   "checks": [
     "Failed storage write can export, retry, and recover after refresh",
     "Internal heading links work; go-to-line reveals source from preview",
@@ -14,7 +14,7 @@
   "browser": "153.0.8010.0",
   "largeEdit": {
     "bytes": 5242886,
-    "editDownloadUndoMs": 1198
+    "editDownloadUndoMs": 1027
   },
   "success": true
 }

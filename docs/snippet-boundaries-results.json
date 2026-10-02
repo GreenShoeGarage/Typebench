@@ -1,0 +1,14 @@
+{
+  "date": "2026-10-01T21:17:32.721Z",
+  "version": "1.1.0",
+  "checks": [
+    "A 30,000-character line refuses oversized PNG allocation but exports full SVG/HTML and keeps source intact",
+    "Slow syntax worker falls back to plain exports; retry restores colors",
+    "Malformed imported snippet data is rejected before replacing existing documents or snippets",
+    "Conflicting app windows cannot overwrite snippets or documents; the blocked copy is exportable",
+    "Fresh Start clears saved snippets and documents durably after confirmation"
+  ],
+  "errors": [],
+  "browser": "153.0.8010.0",
+  "success": true
+}

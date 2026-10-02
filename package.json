@@ -1,6 +1,6 @@
 {
   "name": "typebench",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "description": "Green Shoe Garage local-first text and code editor",
   "scripts": {
     "build": "node scripts/build.mjs",
@@ -15,7 +15,15 @@
     "test:accessibility": "node tests/accessibility.test.mjs",
     "test:qualification": "node tests/qualification.test.mjs",
     "test:upgrade": "node tests/compatibility.test.mjs",
-    "package": "python3 scripts/package.py"
+    "package": "python3 scripts/package.py",
+    "test:snippets": "node tests/snippets.test.mjs",
+    "test:snippets-browser": "node tests/snippets-browser.test.mjs",
+    "test:context-brackets": "node tests/context-brackets.test.mjs",
+    "test:snippet-boundaries": "node tests/snippet-boundaries.test.mjs",
+    "test:folders": "node tests/folders.test.mjs",
+    "test:folders-browser": "node tests/folders-browser.test.mjs",
+    "test:folder-boundaries": "node tests/folder-boundaries.test.mjs",
+    "test:package": "node tests/package-smoke.test.mjs"
   },
   "keywords": [],
   "author": "Green Shoe Garage",
@@ -44,7 +52,8 @@
     "dompurify": "3.4.16",
     "esbuild": "0.28.2",
     "fflate": "0.8.3",
-    "marked": "18.0.14"
+    "marked": "18.0.14",
+    "@codemirror/autocomplete": "6.20.3"
   },
   "devDependencies": {
     "@axe-core/playwright": "4.13.0",

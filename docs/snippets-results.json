@@ -1,0 +1,23 @@
+{
+  "date": "2026-10-01T21:49:22.299Z",
+  "version": "1.2.0",
+  "checks": [
+    "Selected Processing code creates a snippet without surrounding text",
+    "Processing colors, Unicode source, font size, PNG scale, and safe SVG/PNG exports",
+    "HTML, Markdown, and exact-source copy preserve safe selected content",
+    "Denied clipboard permission offers selectable output and download fallback",
+    "Three themes, transparency, optional labels/numbers, and source preservation",
+    "Reusable snippets survive refresh; edits and save-a-copy stay distinct",
+    "Workspace JSON restores snippets; insertion uses one undo/redo step",
+    "Opening a snippet as a document retains original line endings and language",
+    "Snippet parsing, PNG, and SVG work after offline reload at a subdirectory",
+    "Partial multiline constructs use document syntax context without exporting it",
+    "Arduino snippet exports recognize standard functions and constants",
+    "Snippet UI remains accessible at 320 pixels with no page overflow",
+    "Storage failure recovery export includes new snippets and retry saves them",
+    "Saved snippet search and confirmed deletion work without changing documents"
+  ],
+  "errors": [],
+  "browser": "153.0.8010.0",
+  "success": true
+}

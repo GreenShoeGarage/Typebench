@@ -1,6 +1,6 @@
 {
-  "date": "2026-10-01T20:42:04.436Z",
-  "version": "1.0.0",
+  "date": "2026-10-01T21:37:59.189Z",
+  "version": "1.2.0",
   "checks": [
     "Permission-based open and direct write with real browser file handles",
     "External disk edits require explicit overwrite approval",

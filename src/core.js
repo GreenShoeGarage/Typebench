@@ -1,5 +1,9 @@
 // TYPEBENCH — Copyright (C) 2026 Green Shoe Garage. GPL-3.0-only.
-export const VERSION = '1.0.0';
+import {validateSnippets} from './snippet-data.js';
+import {validPath} from './paths.js';
+import {validateFolderData} from './folder-data.js';
+export {validPath,uniqueName} from './paths.js';
+export const VERSION = '1.2.0';
 export function splitText(raw) {
   const breaks = raw.match(/\r\n|\r|\n/g) || [];
   const counts = new Map();
@@ -14,20 +18,6 @@ export function joinText(text, breaks) {
 export function eolLabel(breaks, fallback='\n') {
   const unique = new Set(breaks.length ? breaks : [fallback]);
   return unique.size > 1 ? 'Mixed EOL' : ({'\n':'LF','\r\n':'CRLF','\r':'CR'}[[...unique][0]]);
-}
-export function validPath(value) {
-  const path = value.trim().replace(/\\/g, '/');
-  if (!path || path.startsWith('/') || /[\x00-\x1f<>:"|?*]/.test(path) || path.split('/').some(p=>!p || p==='.' || p==='..' || /[. ]$/.test(p))) throw new Error('Use a relative filename such as notes.md or sketches/blink.ino. Avoid reserved characters and .. path segments.');
-  if(path.split('/').some(p=>/^(con|prn|aux|nul|com[1-9]|lpt[1-9])(\.|$)/i.test(p))) throw new Error('That filename is reserved on Windows. Choose another name.');
-  return path;
-}
-export function uniqueName(name, names) {
-  if (!names.includes(name)) return name;
-  const slash=name.lastIndexOf('/'), dot=name.lastIndexOf('.');
-  const stem=dot>slash ? name.slice(0,dot) : name, ext=dot>slash ? name.slice(dot) : '';
-  let n=2;
-  while(names.includes(`${stem} (${n})${ext}`)) n++;
-  return `${stem} (${n})${ext}`;
 }
 export {detectLanguage} from './language-data.js';
 export function decodeBytes(input) {
@@ -62,6 +52,8 @@ export function validateWorkspace(x) {
     if(validPath(d.name)!==d.name||typeof d.baseName!=='string'||typeof d.bom!=='boolean')throw new Error('The workspace contains an invalid filename or encoding setting.');ids.add(d.id);
   }
   for(const d of x.documents) {if(names.has(d.name)) throw new Error('The workspace contains duplicate paths.');names.add(d.name);}
+  validateSnippets(x.snippets);
+  validateFolderData(x);
   return x;
 }
 export class WorkspaceStore {

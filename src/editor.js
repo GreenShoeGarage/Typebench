@@ -1,8 +1,9 @@
 // TYPEBENCH — Copyright (C) 2026 Green Shoe Garage. GPL-3.0-only.
-import {EditorState, StateField, StateEffect, Compartment, Facet, Transaction} from '@codemirror/state';
+import {EditorState, StateField, StateEffect, Compartment, Facet, Transaction, Prec} from '@codemirror/state';
 import {EditorView, keymap, lineNumbers, highlightActiveLineGutter, highlightActiveLine, drawSelection, dropCursor, highlightWhitespace, Decoration, ViewPlugin} from '@codemirror/view';
 import {history, historyKeymap, defaultKeymap, invertedEffects, undo, redo, undoDepth, redoDepth, indentMore, indentLess, toggleComment, copyLineDown, moveLineUp, moveLineDown, isolateHistory} from '@codemirror/commands';
 import {syntaxHighlighting, HighlightStyle, bracketMatching, indentOnInput, indentUnit} from '@codemirror/language';
+import {closeBrackets,deleteBracketPair} from '@codemirror/autocomplete';
 import {languageSupport, tokenStyle} from './languages.js';
 import {splitText, joinText} from './core.js';
 export {EditorView,undo,redo,undoDepth,redoDepth, indentMore, indentLess, toggleComment, copyLineDown, moveLineUp, moveLineDown, isolateHistory};
@@ -32,7 +33,7 @@ export function languageExtension(id) {
   return [languageName.of(id),languageSupport(id)||[]];
 }
 export const languageComp=new Compartment(), appearanceComp=new Compartment();
-export function appearance(settings) {return [settings.wrap?EditorView.lineWrapping:[],settings.whitespace?highlightWhitespace():[],EditorState.tabSize.of(settings.tabSize),indentUnit.of(settings.indentStyle==='tabs'?'\t':' '.repeat(settings.tabSize)),settings.tabIndents?keymap.of([{key:'Tab',run:insertIndent,shift:v=>runEdit(v,'outdent')}]):[]];}
+export function appearance(settings) {return [settings.autoBrackets!==false?[closeBrackets(),Prec.high(keymap.of([{key:'Backspace',run:view=>deleteBracketPair({state:view.state,dispatch:tr=>view.dispatch(view.state.update({changes:tr.changes,selection:tr.selection,effects:tr.effects,annotations:isolateHistory.of('full'),userEvent:'delete.backward',scrollIntoView:true}))})}])),Prec.highest(EditorState.languageData.of(()=>[{closeBrackets:{brackets:['(','[','{']}}]))]:[],settings.wrap?EditorView.lineWrapping:[],settings.whitespace?highlightWhitespace():[],EditorState.tabSize.of(settings.tabSize),indentUnit.of(settings.indentStyle==='tabs'?'\t':' '.repeat(settings.tabSize)),settings.tabIndents?keymap.of([{key:'Tab',run:insertIndent,shift:v=>runEdit(v,'outdent')}]):[]];}
 const editCommands={indent:indentMore,outdent:indentLess,comment:toggleComment,duplicateLine:copyLineDown,moveUp:moveLineUp,moveDown:moveLineDown};
 export function runEdit(target,name){
   const fn=editCommands[name];if(!fn)return false;if(name==='comment'&&['text','markdown','json'].includes(target.state.facet(languageName)))return false;

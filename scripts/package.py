@@ -11,7 +11,7 @@ allowed={'assets','src','scripts','tests','docs','licenses'}
 root_files={'index.html','sw.js','README.md','CHANGELOG.md','LICENSE','THIRD-PARTY-NOTICES.md','package.json','package-lock.json','.gitignore','.editorconfig'}
 files=sorted(p for p in root.rglob('*') if p.is_file() and (p.relative_to(root).parts[0] in allowed or p.relative_to(root).as_posix() in root_files) and '__pycache__' not in p.parts and not p.name.endswith('-failure.png'))
 assert (root/'index.html') in files
-for name in ['app.js','search-worker.js','markdown-worker.js','zip-worker.js','app.css']:
+for name in ['app.js','search-worker.js','markdown-worker.js','zip-worker.js','snippet-worker.js','app.css']:
  assert (root/'assets'/name) in files,name
 manifest=''.join(hashlib.sha256(p.read_bytes()).hexdigest()+'  '+p.relative_to(root).as_posix()+'\n' for p in files)
 (root/'SHA256SUMS').write_text(manifest)

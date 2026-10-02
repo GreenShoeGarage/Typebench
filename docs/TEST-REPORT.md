@@ -1,87 +1,77 @@
-# TYPEBENCH v1.0.0 — release qualification
+# TYPEBENCH v1.2.0 — release qualification
 
-Date: 2026-10-01. Result: **all listed automated checks passed**; no known release-blocking defect remains in the tested environment. Tests were performed in reviewed batches and repeated after relevant corrections. This report describes exercised behavior, not a guarantee for every browser, document, or device.
+Date: 2026-10-01. The checks listed below passed in the tested environment. Development proceeded in three batches: nested folders/actions, recursive imports, then workflow and release qualification. This records observed behavior and limits, not certification for every browser or device.
 
 ## Environment
 
-- Linux execution container, Node.js 24.19.0.
-- Headless Chromium **153.0.8010.0**, driven by Playwright 1.63.0.
-- Development browser executable supplied with `CHROMIUM_EXECUTABLE`; no browser binaries are required to use the web app.
-- Security-disabling Chromium launch flags were explicitly excluded.
-- Ephemeral localhost static servers at both `/` and `/typebench/`.
-- Desktop widths of 1440 px; responsive checks at 390 and 320 px; a 720 px layout viewport to approximate a 1440 px screen at 200% scale. This is not a physical browser-zoom test.
-- axe-core/Playwright 4.13.0, WCAG 2 A/AA and 2.1 AA rule tags.
+Linux; Node.js 24.19.0; headless Chromium 153.0.8010.0 through Playwright 1.63.0. Static hosting used localhost, including `/typebench/`. Flags that disable browser web security were excluded. Desktop views are 1440 px; mobile layouts are emulated at 390 and 320 px. axe-core/Playwright 4.13.0 checks WCAG 2 A/AA and 2.1 AA tags. Physical devices, OS directory chooser dialogs, and assistive technology were not available.
 
-## Automated suites
+## Checks run for v1.2
 
-| Suite | Named checks | Covered workflows |
+| Suite | Named checks | Scope |
 |---|---:|---|
-| Core | 18 | Unicode, mixed separators, BOMs/encodings, path validation, undo, multi-change preservation, large paste |
-| Editing engine | 15 | Search, regex, captures, zero-width matches, grouped replacement, comment/indent/move/duplicate, 100,000 replacements |
-| Languages | 24 | Every selectable highlighted language, filenames, source preservation, Processing/Arduino API tokens, safe code escaping |
-| Foundation browser | 23 | New/open/edit/save/download/rename/duplicate/close/recover, independent undo, refresh, workspace interchange, conflict/quota failures, drop import, sizes, offline, Mac modifier simulation |
-| Editing browser | 16 | Find/replace UI, regex timeout/cancel, stale results, commands, go-to-line, line operations, tabs/spaces, focus escape, offline search |
-| Markdown browser | 8 | GFM, sketch fences, safe HTML, controlled images, HTML/source exports, formatting/EOL fidelity, outline/divider persistence, PDF, offline and mobile |
-| Files browser | 10 | Direct file handles, write/overwrite conflict, denied permissions, fallback, ZIP paths, recovery, modes, examples, Fresh Start |
-| Accessibility/visual | 11 | Empty state; settings and editor/preview in all three themes; commands; find; narrow mobile/reduced motion; constrained layout |
-| Release checks | 4 | Root route, panel resize persistence, active mobile tab, invalid workspace protection |
-| Additional qualification | 7 | Storage retry and recovery, internal heading links, keyboard tab deletion, runtime-field isolation on workspace import, offline UTF-16 ZIP, path collisions, 5 MiB editing |
-| Upgrade from v0.1.0 | 2 | Existing working copy survives installed service-worker upgrade; default settings/search work afterward |
-| Upgrade from v0.2.0 | 2 | Same compatibility check against the previous delivered release |
-| Packaged deployment | 1 | Extracted ZIP, subdirectory start, Mac shortcut labels, Arduino fence preview, offline reload and exports with no external requests |
+| Core | 18 | Text/Unicode, encodings/BOMs, mixed line endings, paths, undo and large paste |
+| Editing engine | 15 | Find/replace, regex/captures, line commands, grouped undo, 100,000 replacements |
+| Languages | 24 | Bundled highlighting, realistic Processing/Arduino API and multiline constructs, escaping |
+| Snippet data/export logic | 9 | Exact source, validation, compatibility, safe HTML/SVG/Markdown, image size guard |
+| Folder data/APIs | 11 | Paths/collisions/moves, malformed recovery data, directory traversal, cancellation, MIME handling |
+| Foundation browser | 23 | Editing/tabs/files, refresh, JSON, conflicts/quota, plain-file drops, offline, mobile, large files |
+| Native files and ZIP | 10 | Actual browser file-handle writes, conflicts, denied access, fallback, ZIP paths/encodings |
+| Existing accessibility/layout | 11 | Empty tree, themes, dialogs, commands, find, reduced motion and narrow layouts |
+| Context menus and brackets | 13 | Targeted file actions, keyboard/touch, all themes, bracket pairing/wrap/undo and CRLF |
+| Snippet browser | 14 | Sharing formats, clipboard fallback, persistence/reuse, offline, sketch syntax, mobile and recovery |
+| Folder browser workflows | 12 | Nested creation/moves, real picker/drop, 126-file traversal, ZIP, recovery, JSON, themes/mobile/offline |
+| Folder boundaries | 7 | Atomic cancellation, storage failure/retry, invalid imports, chosen parent, Fresh Start, empty-only ZIP/recovery |
+| Installed v1.1.0 upgrade | 3 | Byte-exact recovery, safe defaults/search, nested legacy paths, snippets and bracket preferences |
+| Extracted ZIP smoke | 2 | Packaged local runtime, offline snippets/Markdown, nested folder import/reload and exact ZIP output |
 
-Machine-readable results accompany this file. A named check can contain several assertions. Final corrections were verified with the relevant suites; print-only CSS was rechecked through the complete Markdown suite and visually reviewed as a rendered PDF.
+Each named check can include multiple assertions. Machine-readable reports identify their version. `unit-results.json` captures the five pure/data suites. Reports still marked v1.1.0 or v1.0.0 are historical, not reruns of this release. In particular, the separate editing-browser, comprehensive Markdown, additional qualification, snippet-boundary and old-baseline upgrade suites were not repeated for v1.2. Prior full qualification is preserved in `TEST-REPORT-v1.0.0.md` and `TEST-REPORT-v1.1.0.md`.
 
-## File fidelity and recovery
+## Folder and import results
 
-Byte-for-byte round trips covered UTF-8 with and without BOM, UTF-16LE/BE with BOM, Unicode including emoji and combining marks, LF/CRLF/CR in one file, trailing spaces, and final newlines. Downloads and ZIP output were read back and compared to their inputs. Workspace export/import retained source and manual language selection. Existing schema-1 browser workspaces survived both previous-release upgrades.
+Creating `Project/src/empty` makes parent directories and retains the empty leaf. New text/Markdown files target the chosen folder. File rename/move retains full relative paths. Moving a folder updates every descendant together and rejects cycles and conflicting names. Collapse states survive refresh. Arrow navigation, Shift+F10, F2, Escape and visible action buttons remain usable. Root/path collisions receive suffixes without overwriting existing working copies.
 
-Two app windows attempted competing saves; the stale write was blocked and could be exported. Simulated storage quota failure retained the live text and offered recovery export. Restoring storage availability and pressing Retry saved the copy, which survived refresh. Closing tabs retained recoverable content; in-session close/reopen retained undo history. Fresh Start produced an empty workspace after reload.
+The directory picker test supplies an actual temporary directory through Playwright's file-input API, preserving real `webkitRelativePath` values. It imports six source files, including Arduino, TypeScript, SVG text, Markdown and UTF-16BE, and reports a binary PNG as skipped. Reimporting retains both complete hierarchies under distinct root names. This exercises the browser input API, not a human OS chooser interaction.
 
-Permission-based save tests used **actual browser FileSystemFileHandles from OPFS**, with the native chooser substituted by test code. They exercised real read/write/close operations, renaming during an in-flight write, outside changes, explicit overwrite confirmation, permission-error handling, and download fallback. They do **not** qualify native operating-system picker dialogs or all browser permission UI.
+The directory drop test supplies an actual on-disk folder through Chromium's drag-event protocol. The folder contains 125 top-level files plus a nested Processing sketch: **126 text files**, with a nested empty directory. All files appear, demonstrating repeated directory-reader batches beyond Chromium's 100-entry batch. A separate API test traverses 252 file entries. The combined browser workflow reaches **139 open documents**. All documents remain tabs; the tree is the practical navigator for that size of collection.
 
-## Markdown security
+ZIP checks compare exact mixed CRLF/LF Arduino bytes and BOM-marked UTF-16BE output. Relative paths and explicit empty directory entries survive. Empty-folder-only workspaces also produce a valid ZIP. JSON import/export retains document source, folders, settings and grouped recovery. Folder deletion is confirmed and recoverable after refresh; an occupied original path produces a new root. Deleted empty folders can be backed up as JSON, imported, and restored without creating dummy files.
 
-Imported scripts, event-bearing image tags, iframes, style imports, and unsafe links did not execute. No image network request occurred before explicit permission. One approved image made one request to its intercepted address; Block images removed it. HTML exports had a restrictive CSP, highlighted code, and no executable script or image elements. Original Markdown downloads stayed byte-identical. Worker parsing and all exports tested offline after shell installation.
+Cancellation during a deliberately slow recursive read leaves the workspace unchanged. An unresolved directory read can also be interrupted. A simulated permission error preserves accessible siblings and records the error. Quota-failure injection leaves imported files and folders in recovery JSON; retry and refresh restore the complete successful import. Invalid folder paths, missing recovery roots, repeated recovery references, and mismatched document paths are rejected. Fresh Start clears folder state after confirmation.
 
-Safe preview intentionally escapes arbitrary embedded HTML. It is not a general HTML renderer. Preview task checkboxes are read-only; their source is editable. Image approval is session/view-specific, and images are omitted from exported HTML.
+Common binary formats are reported and skipped. Supported text extensions override misleading MIME values, including `.ts` reported as video and `.svg` as an image. Text still passes strict encoding/NUL validation. This release imports editable text sources, not every binary asset in a project.
 
-## Size and performance observations
+## Regressions, fixes, and upgrade
 
-These are observed timings on this container, not minimum hardware specifications. Some suites ran concurrently. Inputs were short-line plain text; source-code grammar complexity and Markdown DOM size were not benchmarked at the same sizes.
+Ordinary file drag/drop, file saves, undo/recovery, mixed line endings, all snippet outputs, and automatic bracket completion passed again. Native-save tests use real FileSystemFileHandles backed by OPFS with a substituted chooser, not real OS dialogs.
 
-| Input | Open until active | Open + exact download |
+Review found and fixed a queued focus-scroll event that prematurely dismissed a context menu in a long tree. Large-workspace modal interactions repeatedly stalled with the decorative backdrop blur; removing the blur allowed the complete workflow to pass. A regression test caught plain-file drops entering the folder-report route when a modern handle resolved to null; routing now preserves the ordinary file workflow. The empty file panel gained an appropriate accessible group role. Two test assertions were updated to wait for the asynchronous native dialog-close event before inspecting confirmed deletions. Final runs passed.
+
+A service-worker upgrade from the released v1.1.0 preserved mixed-ending text byte-for-byte, a saved snippet and the disabled-bracket preference. Existing slash-separated filenames appeared as nested folders automatically. Optional schema-1 folder fields keep old workspaces importable. Older app versions cannot retain empty folder/group metadata, so keep the v1.2 JSON backup before downgrading.
+
+## Performance observations
+
+Measured during the current foundation run in this container; these are observations, not speed guarantees:
+
+| Plain-text input | Open until active | Open plus exact download |
 |---|---:|---:|
-| 100 KiB | 130 ms | 186 ms |
-| 1 MiB | 236 ms | 292 ms |
-| 5 MiB | 882 ms | 1,001 ms |
-| 10 MiB | 1,579 ms | 1,714 ms |
+| 100 KiB | 144 ms | 208 ms |
+| 1 MiB | 279 ms | 437 ms |
+| 5 MiB | 1,331 ms | 1,517 ms |
+| 10 MiB | 2,318 ms | 2,454 ms |
 
-A **1 MiB single line** also round-tripped exactly. A separate **5,242,886-byte** file was edited, downloaded, undone, and compared with the original in **1,198 ms** for that operation sequence. The editing-engine suite applied **100,000 replacements** and restored the exact original with undo.
+A 1 MiB single line also round-tripped exactly. There is no arbitrary text-size or file-count gate. Memory, quota, syntax complexity and preview size remain practical limits. All documents have in-memory editor states; very large imports can pause while those states are committed. Cancellation covers scanning and reads, not the final synchronous commit. Multi-gigabyte collections and ZIP64 are not supported or qualified. No claim is made that every 10 MiB code/Markdown file edits as smoothly as plain text.
 
-No arbitrary file-size gate is imposed. These observations do not certify multi-gigabyte documents, enormous highlighted files, or huge Markdown tables. Regex has a roughly 2.5-second worker budget; the pathological `(a+)+$` case timed out without blocking editing/download. Markdown preview has a 5-second budget with a longer explicit retry. Large preview DOMs and huge replacements may still pause the UI, and browser storage/memory can run out.
+## Visual, accessibility, and browser limits
 
-## Visual and accessibility review
+Screenshots in `docs/screenshots/` cover nested workspaces and folder menus in dark, light, and high-contrast themes, plus a 320 px menu. All three were visually inspected. The editor remains dominant, folder nesting is visible, menus stay inside the viewport, and the page does not overflow horizontally. Automated tested states reported zero axe violations; this is not accessibility certification. Existing snippet layouts, reduced motion and keyboard focus checks passed again.
 
-Screenshots in `screenshots/` were reviewed for workspace dominance, readable syntax, status clarity, toolbar reachability, clipping, and responsive behavior. Dark, light and high-contrast themes were checked. The app displayed v1.0.0 during the release screenshots.
+Folder picking cannot expose empty directories; directory drops keep them when the browser supplies them. Modern-handle fallback is API-tested, while the real Chromium drop uses entry traversal. Safari/Firefox/Edge-specific behavior, physical macOS/Windows/iOS/Android devices, touch/IME, real OS directory chooser dialogs, screen readers, long multi-day sessions and public-server/CDN deployment are not qualified here. An emulated Mac platform tests shortcuts, not macOS itself.
 
-The first-use view begins empty with New, Open, and New Markdown; examples are optional. Tabs, command search, dialogs, dividers, find, and source editing were exercised through keyboard paths. Escape then Tab leaves the editor, including when Tab-to-indent is enabled. Delete closes the focused tab into recovery. Reduced motion was emulated.
+Imports and folder actions change browser working copies only. There is no native directory write-back, filesystem watching, server file manager, binary editor, code execution or cloud sync. Imports don't retain directory-write permission. Undo and native file handles remain session-only. Browser storage and cached app files may be evicted; independent exports remain necessary.
 
-The final axe runs found **zero violations in the tested states** for the selected rule tags. This is not an accessibility certification. Review found and corrected tab-close ARIA semantics, unlabeled task checkboxes, scrolling code blocks without keyboard focus, a cramped phone formatting row, hidden-source find navigation, and dark-theme print margins.
+## Release package
 
-`print-sample.pdf` is a one-page A4 output generated by Chromium and visually inspected after rasterization. Its page background is white regardless of theme, with readable code, table, task list, and no application controls. It is not a tagged/accessibility-qualified PDF.
+The ZIP contains root `index.html`, deployable local assets/service worker, readable source, tests/helpers, GPL-3.0-only application license, dependency notices, README/changelog, screenshots and SHA-256 checksums. The extracted production assets are tested without rebuilding, and runtime hashes are recorded in `package-smoke-results.json`. The final ZIP manifest is checked against every included file.
 
-## What was not qualified
-
-- Physical macOS/Windows/iOS/Android hardware, touch keyboards, IME composition, or screen readers.
-- Firefox, Safari, or Edge-specific behavior; real OS open/save picker dialogs.
-- A public production deployment or a server-specific cache/CDN configuration.
-- Actual 200% browser zoom; a constrained layout width was used instead.
-- Multi-gigabyte documents, ZIP64 archives, prolonged multi-day editing, browser eviction under OS memory pressure, or power loss at every save boundary.
-- Every language dialect, newest C#/Java/PowerShell syntax, or contributed Arduino/Processing library. Highlighting is lexical presentation, never semantic validation.
-
-Undo histories and disk handles do not persist across refresh. Relative image references resolve against the app directory, not the imported file's disk folder. Native file conflict detection cannot lock other desktop programs out between checking and writing. These limits are documented in the README and are intentional v1.0 boundaries.
-
-## Release evidence
-
-Production dependency audit reported zero registry-known vulnerabilities at the time of the check (`dependency-audit.json`). This is an advisory snapshot, not proof of complete security. The GitHub-ready ZIP contains the deployable static files, source, build/test scripts, lockfile, GNU GPL v3 application license, bundled dependency notices, this report, screenshots, and SHA-256 file checksums. No account, runtime build, CDN, or application backend is required.
+No runtime dependency was added or updated for v1.2. The existing dependency-audit JSON is a historical registry snapshot, not a current security audit or guarantee.

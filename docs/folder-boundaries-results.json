@@ -1,0 +1,16 @@
+{
+  "date": "2026-10-01T21:48:19.435Z",
+  "version": "1.2.0",
+  "checks": [
+    "Cancelling an in-progress recursive import leaves all existing workspace data intact",
+    "Storage failure exposes recovery export containing the whole imported folder; retry survives refresh",
+    "Unsafe folder paths in workspace JSON are rejected before replacement",
+    "Import folder here uses the chosen parent while preserving the imported root",
+    "Folder context action creates a Markdown document in the correct parent",
+    "Fresh Start clears active and recovered folders durably",
+    "Empty-folder-only ZIP and deleted empty-folder recovery survive workspace JSON round trips"
+  ],
+  "errors": [],
+  "browser": "153.0.8010.0",
+  "success": true
+}

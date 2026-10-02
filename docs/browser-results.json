@@ -1,4 +1,5 @@
 {
+  "version": "1.2.0",
   "date": "2026-10-01",
   "checks": [
     "Cold start is empty, with New and Open actions",
@@ -28,27 +29,26 @@
   "performance": [
     {
       "bytes": 102400,
-      "openMs": 130,
-      "roundTripMs": 186
+      "openMs": 144,
+      "roundTripMs": 208
     },
     {
       "bytes": 1048576,
-      "openMs": 236,
-      "roundTripMs": 292
+      "openMs": 279,
+      "roundTripMs": 437
     },
     {
       "bytes": 5242880,
-      "openMs": 882,
-      "roundTripMs": 1001
+      "openMs": 1331,
+      "roundTripMs": 1517
     },
     {
       "bytes": 10485760,
-      "openMs": 1579,
-      "roundTripMs": 1714
+      "openMs": 2318,
+      "roundTripMs": 2454
     }
   ],
   "errors": [],
   "browser": "153.0.8010.0",
-  "success": true,
-  "version": "1.0.0"
+  "success": true
 }

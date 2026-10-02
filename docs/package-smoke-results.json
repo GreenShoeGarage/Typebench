@@ -1,19 +1,21 @@
 {
-  "date": "2026-10-01T20:42:57.063Z",
-  "version": "1.0.0",
+  "date": "2026-10-01T21:53:51.654Z",
+  "version": "1.2.0",
   "checks": [
-    "Extracted ZIP starts under a subdirectory, has Mac shortcut labels, previews Arduino, reloads offline and exports without external requests"
+    "Extracted ZIP imports a nested folder offline, restores it after reload, and exports exact Arduino bytes and empty directories",
+    "Extracted ZIP starts under a subdirectory, has Mac shortcut labels, previews Arduino, reloads offline and exports Markdown, SVG and PNG without external requests"
   ],
   "errors": [],
   "browser": "153.0.8010.0",
   "runtimeSHA256": {
-    "index.html": "0b1d306e73059e7f08ca8c8d662fa9bd1c40b36294ee6539d2cae4bab3fb7768",
-    "assets/app.js": "0b0cbb86a243e49d5f0ff517d5b7a1e0a92620cb6ab0b6b227b16458599e8639",
-    "assets/app.css": "e866c167e98effc5c7c12ebe00a2fbafb0fb6fd21314c9fbb396c87a9f6c1474",
+    "index.html": "79d6f7a9a670970527bedee5e078e65a86d8f2fb27c45a5199f136c7b8bb4ae2",
+    "assets/app.js": "e5062a555bb44f361eb86c9e330b49e7d925a193e0d5eb5e03a2ba8add0f17cd",
+    "assets/app.css": "81dadea77f88fd85b3d50fcfb088325819a7c515c6dfa61930c69e5e240dd542",
     "assets/search-worker.js": "7a54d64ee350e0ac5912eb2a7076cc325bbfdbdb1786c0578f3dad0a3784263e",
     "assets/markdown-worker.js": "4ae7042c6719f27b89b1dd0fcde538ee933bba112c52945ea937205d2e316345",
-    "assets/zip-worker.js": "09424185c7437305db38435a6371e20ef9f0f0d1c1c5ba0104ad86e28dc2e801",
-    "sw.js": "78ef52773e7b7408c22b9e5e0e98caac4ee3543ccf1bfb838dae376d0a809368"
+    "assets/zip-worker.js": "cfc32d43d4df737d1abe749a9486f359a30c91629ed64ffed4ea2559db0ef57e",
+    "assets/snippet-worker.js": "8b60b18152d1f19ba920f35eeb47ba2bc9122ad943d51d740d856590fb55f446",
+    "sw.js": "bad092b205672f8dd9642a207deee056e216e47445e55107bddfa572064bdf8b"
   },
   "success": true
 }

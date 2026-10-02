@@ -1,0 +1,10 @@
+{
+  "version": "1.2.0",
+  "baselineVersion": "v1.1.0",
+  "success": true,
+  "checks": [
+    "v1.1.0 browser workspace survives service-worker upgrade to v1.2.0 byte-for-byte",
+    "New settings receive safe defaults and search runs after upgrade",
+    "Legacy relative paths become nested folders while saved snippets, exact source and bracket preferences survive"
+  ]
+}

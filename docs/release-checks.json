@@ -1,10 +1,10 @@
 {
+  "version": "1.1.0",
   "success": true,
   "checks": [
     "Root route and truthful new-file status",
     "Keyboard panel resize persisted after refresh",
     "Active tab remains visible after mobile resize and focus is visible",
     "Malformed workspace leaves current documents intact"
-  ],
-  "version": "1.0.0"
+  ]
 }

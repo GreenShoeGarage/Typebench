@@ -1,6 +1,6 @@
 {
-  "date": "2026-10-01T20:32:49.648Z",
-  "version": "1.0.0",
+  "date": "2026-10-01T21:49:37.486Z",
+  "version": "1.2.0",
   "checks": [
     "Empty workspace accessibility",
     "dark settings dialog",

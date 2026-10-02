@@ -1,17 +1,109 @@
 {
-  "version": "1.0.0",
-  "date": "2026-10-01",
-  "success": true,
-  "commands": {
-    "npm test": {
-      "passed": 18
+  "version": "1.2.0",
+  "date": "2026-10-01T21:53:32.223543+00:00",
+  "suites": {
+    "Core": {
+      "checks": [
+        "text round trip \"\"",
+        "text round trip \"abc\"",
+        "text round trip \"caf\u00e9 \ud83d\udee0\ufe0f\\r\\n\u03b2\\n\u65e5\u672c\u8a9e\\rfinal  \"",
+        "text round trip \"a\\r\\nb\\r\\n\"",
+        "text round trip \"a\\rb\"",
+        "text round trip \"\\n\\r\\n\\r\"",
+        "utf-8 bytes false",
+        "utf-8 bytes true",
+        "utf-16le bytes true",
+        "utf-16be bytes true",
+        "invalid UTF-8 rejected",
+        "unsafe paths rejected",
+        "collision suffix",
+        "invalid workspace rejected",
+        "mixed line endings survive edit undo redo",
+        "grouped undo restores mixed breaks",
+        "multiple selection operations retain untouched breaks",
+        "large pasted text does not hit argument limit"
+      ],
+      "success": true
     },
-    "npm run test:editing": {
-      "passed": 15
+    "Editing engine": {
+      "checks": [
+        "literal search treats regex syntax literally",
+        "case and Unicode whole-word filtering",
+        "regex numbered and named captures",
+        "literal replacement leaves dollar and slash unchanged",
+        "regex newline and zero-width behavior",
+        "invalid expression rejected",
+        "replace all is one undo and retains mixed endings",
+        "indent and outdent preserve separators",
+        "tab indentation uses configured setting",
+        "move lines retains newline sequence and undoes",
+        "duplicate last line and undo",
+        "comment toggle and grouped undo",
+        "display and indentation settings do not alter source",
+        "100,000 replacements without repeated separator copying",
+        "comment is unavailable for plain text and JSON"
+      ],
+      "success": true
     },
-    "npm run test:languages": {
-      "passed": 24
+    "Languages": {
+      "checks": [
+        "Markdown",
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "TypeScript",
+        "JSON",
+        "Python",
+        "C",
+        "C++",
+        "Java",
+        "C#",
+        "Go",
+        "Rust",
+        "PHP",
+        "Ruby",
+        "Bash / shell",
+        "PowerShell",
+        "SQL",
+        "YAML",
+        "TOML",
+        "XML",
+        "Processing",
+        "Arduino",
+        "Processing and Arduino API tokens, multiline constructs, escaping and filename detection"
+      ],
+      "success": true
+    },
+    "Snippet exports/data": {
+      "checks": [
+        "Snippet workspace round trip keeps exact source, metadata, and options",
+        "Older workspaces without snippets remain valid",
+        "Malformed snippet collections, tokens, and duplicate IDs fail before workspace replacement",
+        "Imported options cannot inject CSS or inflate raster scaling",
+        "Embeddable HTML escapes source and has no executable tags or external resources",
+        "Markdown fence remains valid when source includes nested fences and mixed endings",
+        "Image layout expands tabs while original source stays intact",
+        "Oversized PNG fails before a canvas allocation; source remains exportable",
+        "SVG replaces XML-forbidden control characters without mutating stored source"
+      ],
+      "success": true
+    },
+    "Folder data/APIs": {
+      "checks": [
+        "Folder ancestry retains explicit empty folders",
+        "Namespace handles file/folder, case, ancestor and extension collisions",
+        "Folder move maps all descendants, preserves empty folders, prevents cycles/collisions",
+        "Invalid folder data and mismatched recovery references are rejected",
+        "Folder recovery rejects shared document references and missing roots",
+        "Picker groups files by root and preserves relative paths",
+        "Recursive drop drains every directory batch, including empty folders",
+        "Entry permission errors are recorded without dropping sibling files",
+        "Cancel interrupts an unresolved directory read",
+        "Drop handles are captured synchronously, with file and modern-handle fallback",
+        "Text/source extensions take precedence over misleading binary MIME types"
+      ],
+      "success": true
     }
   },
-  "notes": "Counts are named checks, often containing multiple assertions."
+  "success": true
 }

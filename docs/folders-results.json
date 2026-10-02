@@ -1,0 +1,21 @@
+{
+  "date": "2026-10-01T21:51:43.561Z",
+  "version": "1.2.0",
+  "checks": [
+    "Nested folder creation, empty folders, new files inside folders, and relative file moves",
+    "Folder rename/move changes descendants atomically and blocks collisions/cycles",
+    "Collapse state persists, arrow navigation works, and context menus preserve disclosure state",
+    "Real directory picker imports nested text, Arduino, SVG/TypeScript, encodings, and reports binary skips",
+    "Repeated folder import keeps both complete hierarchies without overwriting",
+    "Real browser directory drop drains more than 100 entries and preserves nested empty folders",
+    "ZIP exports exact file bytes, relative paths, BOMs and explicit empty directories",
+    "Folder deletion is confirmed and recoverable across refresh; restoration avoids occupied paths",
+    "Workspace JSON round trip preserves folders, contents, recovery metadata and settings",
+    "Nested tree and folder menus pass automated accessibility checks across all themes",
+    "Folder tree and touch menus remain usable at 320 px",
+    "Nested workspace restores, imports local folders and exports ZIP after offline reload"
+  ],
+  "errors": [],
+  "browser": "153.0.8010.0",
+  "success": true
+}

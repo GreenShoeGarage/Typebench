@@ -1,0 +1,16 @@
+import assert from 'node:assert/strict';
+import {validateWorkspace} from '../src/core.js';
+import {validateSnippets,snippetOptions} from '../src/snippet-data.js';
+import {snippetHTML,snippetSVG,snippetMarkdown,layoutSnippet,paintSnippet} from '../src/snippet-render.js';
+const snippet={id:'one',name:'Safety <test>',filename:'blink.ino',raw:'// café 🛠️\r\n\tdigitalWrite(13, HIGH);\n<script>alert(1)</script>',language:'arduino',startLine:12,spans:[[0,10,'tok-comment']],options:snippetOptions()};
+let count=0;function test(name,fn){fn();console.log('PASS',name);count++;}
+test('Snippet workspace round trip keeps exact source, metadata, and options',()=>assert.deepEqual(validateSnippets(JSON.parse(JSON.stringify([snippet]))),[snippet]));
+test('Older workspaces without snippets remain valid',()=>{assert.deepEqual(validateSnippets(undefined),[]);validateWorkspace({format:'typebench-workspace',schema:1,documents:[],closed:[]});});
+test('Malformed snippet collections, tokens, and duplicate IDs fail before workspace replacement',()=>{for(const snippets of [{},[snippet,snippet],[{...snippet,raw:3}],[{...snippet,spans:[[0,2,'evil" onclick="alert(1)']]}],[{...snippet,spans:[[0,999,'tok-str']]}],[{...snippet,startLine:-1}]])assert.throws(()=>validateWorkspace({format:'typebench-workspace',schema:1,documents:[],closed:[],snippets}));});
+test('Imported options cannot inject CSS or inflate raster scaling',()=>{const o=snippetOptions({theme:'__proto__',background:'red; background:url(https://bad)',scale:999,fontSize:100000});assert.equal(o.theme,'dark');assert.equal(o.background,'#141a17');assert.equal(o.scale,2);assert.equal(o.fontSize,32);});
+test('Embeddable HTML escapes source and has no executable tags or external resources',()=>{const html=snippetHTML(snippet);assert(html.includes('&lt;script&gt;'));assert(!/<script|<img|<iframe|url\(/i.test(html));assert(html.includes('aria-hidden="true"'));assert(html.includes('tab-size:2'));});
+test('Markdown fence remains valid when source includes nested fences and mixed endings',()=>{const raw='```js\r\nconst a = `x`;\r\n```';const md=snippetMarkdown({...snippet,raw,language:'markdown'});assert(md.startsWith('````markdown\r\n'));assert(md.includes(raw));assert(md.endsWith('\r\n````\r\n'));});
+test('Image layout expands tabs while original source stays intact',()=>{const raw=snippet.raw;const layout=layoutSnippet(snippet,(s,size)=>[...s].length*size*.6);assert(layout.lines[1].map(r=>r.text).join('').startsWith('  digital'));assert.equal(snippet.raw,raw);const svg=snippetSVG(snippet,layout);assert(!svg.includes('<script>'));assert(svg.includes('&lt;script&gt;'));assert(svg.includes('>13</text>'));assert(!/foreignObject|<image|href=|<style/.test(svg));});
+test('Oversized PNG fails before a canvas allocation; source remains exportable',()=>{const layout=layoutSnippet({...snippet,raw:'x'.repeat(50000),spans:[]},s=>s.length*10);assert.throws(()=>paintSnippet({},snippet,layout),/too large/);assert(snippetSVG(snippet,layout).startsWith('<svg'));});
+test('SVG replaces XML-forbidden control characters without mutating stored source',()=>{const s={...snippet,raw:'a\u0001b\ud800',spans:[]};const svg=snippetSVG(s,layoutSnippet(s,t=>t.length*10));assert(!svg.includes('\u0001'));assert(!svg.includes('\ud800'));assert.equal(s.raw,'a\u0001b\ud800');});
+console.log(count+' snippet checks passed');

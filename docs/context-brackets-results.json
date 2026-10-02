@@ -1,0 +1,22 @@
+{
+  "date": "2026-10-01T21:46:50.198Z",
+  "version": "1.2.0",
+  "checks": [
+    "Right-click duplicates the targeted inactive file with exact source and language",
+    "Context rename targets the clicked file and preserves relative paths",
+    "Context download and fallback Save export the inactive target without switching documents",
+    "Delete from workspace is recoverable and leaves other files intact",
+    "Tab context menus, Shift+F10, F2, arrows, typeahead, Escape, and focus return",
+    "File menus pass automated accessibility checks in all three themes",
+    "Touch-friendly file action button stays within a 320 px viewport",
+    "Bracket insertion, closer skipping, paired deletion, and undo/redo",
+    "Typing an opener wraps selected text and undoes as one operation",
+    "Arduino braces combine with automatic indentation and a matching closing line",
+    "Processing bracket completion preserves existing CRLF bytes",
+    "Bracket setting persists and can be disabled; quotes are not auto-paired",
+    "Importing complete code never adds or changes brackets"
+  ],
+  "errors": [],
+  "browser": "153.0.8010.0",
+  "success": true
+}

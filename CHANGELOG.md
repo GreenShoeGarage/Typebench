@@ -1,5 +1,31 @@
 # Changelog
 
+## 1.2.0 — 2026-10-01
+
+Completed in three batches: folder tree/actions, recursive imports, and workflow/release qualification.
+
+- Add a nested file/folder tree with disclosure controls, persistent collapsed states, natural sorting, keyboard navigation, and folder context menus.
+- Create nested and empty folders, create files inside them, rename/move whole subtrees, and confirm deletion with grouped recovery across refresh. All operations affect browser working copies.
+- Import whole folders with a directory picker or recursive drag and drop, retaining relative paths and known empty directories. Drain repeated directory-reader batches so drops with more than 100 entries are complete.
+- Add import progress, atomic cancellation during reads, collision-safe root/path naming, and downloadable reports for skipped binary/unreadable files. Preserve supported source encodings and exact text.
+- Extend schema 1 with optional folders, collapsed states, and folder recovery records. Include empty directory entries in ZIPs; support empty-folder-only exports.
+- Keep ordinary file drops, snippets, direct saves, and bracket completion; cache unchanged tab/tree rendering to avoid unnecessary rebuilding on typing.
+- Correct context menu dismissal during queued focus-scroll events and remove decorative modal backdrop blur to keep large-workspace dialogs responsive.
+- Add folder data/API/browser/recovery tests and update deployment, compatibility, and browser-limit documentation. No new runtime dependency.
+
+## 1.1.0 — 2026-10-01
+
+Completed in three reviewed batches: snippets, contextual editing, and release qualification.
+
+- Create a snippet from selected source, with inherited highlighting, live preview, theme/background/transparency, font size, padding, tab width, filename caption, and optional line numbers.
+- Save PNG/SVG/styled HTML; copy embeddable HTML, fenced Markdown, or original selected code. All generation stays local and works offline. Clipboard failures offer copy/download fallback.
+- Parse syntax in a timed worker using the surrounding document, while saving/exporting only the selected content and token colors.
+- Save reusable snippets with workspace autosave and JSON backups. Search, reopen/export, insert with one undo step, open as a document, update, save a copy, and delete with confirmation.
+- Add right-click menus on tabs/file rows, visible file action buttons, and keyboard equivalents for open/save/download/rename/duplicate/delete. Actions target the clicked file; deletion stays recoverable and never deletes disk files.
+- Add optional CodeMirror automatic closing of `()`, `[]`, and `{}`, selection wrapping, closer skipping, and isolated undo for paired Backspace. Existing text and imported/pasted code are unchanged.
+- Extend schema 1 compatibly with optional snippets and bracket settings, include the new worker in offline caches, and keep the static deployment structure.
+- Add image-memory feedback, safe SVG/HTML escaping, new browser/security/accessibility tests, and updated documentation.
+
 ## 1.0.0 — 2026-10-01
 
 Completed the bounded editor release in reviewed development batches.

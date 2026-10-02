@@ -1,4 +1,5 @@
 {
+  "version": "1.1.0",
   "date": "2026-10-01",
   "checks": [
     "Find highlights, case, whole word, and wrapping navigation",
@@ -21,6 +22,5 @@
   "performance": [],
   "errors": [],
   "browser": "153.0.8010.0",
-  "success": true,
-  "version": "1.0.0"
+  "success": true
 }

@@ -1,6 +1,6 @@
 {
-  "date": "2026-10-01T20:36:14.455Z",
-  "version": "1.0.0",
+  "date": "2026-10-01T21:12:48.355Z",
+  "version": "1.1.0",
   "checks": [
     "GFM preview, both sketch fences, scripts/HTML escaped and no silent resource requests",
     "Image requests require explicit per-image permission and can be blocked again",
